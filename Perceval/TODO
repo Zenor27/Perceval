@@ -1,0 +1,29 @@
+﻿[X] - No policy on password
+[X] - Refactor Login
+[X] - Verify admin account is not already in db
+[X] - Display errors on login view
+[X] - When already logged, and try to go to /Login, redirect to an error page
+
+
+[X] - Modify Identity capabilities:
+    [X] - Change password
+    [X] - simpler Index page with user name and Hello
+    [X] - Disable everything else
+    [X] - Create a new user
+    
+[ ] - Cpu
+    [X] - Display one simple informations, for example the current proco %
+    [X] - Update CPU % each 2 seconds
+    [ ] - Avoid redraw of charts
+    [ ] - Draw cpu usage line chart
+    [ ] - Verify and create methods on linux
+    
+[ ] - Separate view models for each informations (CPU, RAM etc)
+
+[ ] - Look for a way to create generic cards
+   
+[ ] - Ram
+
+[ ] - IO
+
+[ ] - Avoid CDN usage

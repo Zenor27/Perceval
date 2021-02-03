@@ -1,0 +1,18 @@
+﻿@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+
+<div class="row justify-content-evenly">
+    <div id="cpu-card">
+        @Html.Partial("CpuCard", Model)
+    </div>
+</div>
+
+
+<script>
+$(() => {
+    setInterval(() => $('#cpu-card').load('/Dashboard/GetCpuInformations'), 2000);
+});
+</script>

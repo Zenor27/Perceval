@@ -1,0 +1,17 @@
+﻿.login-background {
+    background: linear-gradient(-135deg, #c850c0, #4158d0);
+}
+
+.login-errors {
+    color: red;
+}
+
+.login-card {
+    padding: 10px 10px 10px 10px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

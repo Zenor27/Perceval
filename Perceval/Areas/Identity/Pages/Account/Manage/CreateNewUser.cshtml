@@ -1,0 +1,30 @@
+﻿@page
+@model CreateNewUserModel
+
+@{
+    ViewData["Title"] = "Create user";
+    ViewData["ActivePage"] = ManageNavPages.CreateNewUser;
+}
+
+<partial name="_StatusMessage" model="Model.StatusMessage"/>
+<div class="row">
+    <div class="col-md-6">
+        <h4>Create a new user</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <form method="post">
+                    <div class="form-group">
+                        <label for="inputUsername">Username</label>
+                        <input type="text" class="form-control" id="inputUsername" placeholder="Enter username" asp-for="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Password" asp-for="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
