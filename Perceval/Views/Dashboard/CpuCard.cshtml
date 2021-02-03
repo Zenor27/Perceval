@@ -1,0 +1,91 @@
+﻿@model DashboardViewModel
+
+
+@Model.CpuUsage
+
+<div class="card card-rounded">
+    <div class="card-body bg-orange d-flex flex-row card-rounded-top">
+        <div class="icon-shape text-white rounded-circle shadow bg-orange-icon">
+            <i class="fas fa-microchip"></i>
+        </div>
+        <div class="d-flex flex-column ml-4">
+            <h5 class="card-title">@Model.CpuName @@ @Model.CpuClockSpeed Ghz</h5>
+            <p class="card-text">@Model.PhysicalCpuCores / @Model.LogicalCpuCores cores</p>
+        </div>
+        <div class="cpu-usage-chart">
+            <canvas id="cpu-usage-chart" width="75" height="75"></canvas>
+        </div>
+    </div>
+    <div class="card-body card-rounded-bottom">
+        <canvas id="cpu-chart"></canvas>
+    </div>
+</div>
+
+
+<script>
+var cpuChartCtx = document.getElementById('cpu-chart').getContext('2d');
+
+var conf = {
+    type: 'line',
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', '8', '9', '10'],
+        datasets: [{
+            label: 'Tests',
+            data: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.8],
+            fill: false,
+            backgroundColor: "#ffbe76",
+            borderColor: "#ffbe76"
+        }]
+    },
+    options: {
+        legend: {
+            display: false,
+        },
+        aspectRatio: 2,
+        scales: {
+            xAxes: [{
+                display: false,
+
+            }]
+        }
+    }
+};
+
+new Chart(cpuChartCtx, conf);
+
+
+var cpuUsageConfig = {
+    type: 'doughnut',
+    data: {
+        datasets: [{
+            data: [
+                @Model.CpuUsage,
+                1 - @Model.CpuUsage
+            ],
+            backgroundColor: [
+                "#6ab04c",
+                "#fffff"
+            ],
+            borderWidth: 0,
+        }],
+        labels: [
+            'Used',
+            'Free'
+        ]
+    },
+    options: {
+        cutoutPercentage: 80,
+        responsive: true,
+        legend: {
+            display: false
+        },
+        animation: {
+            animateScale: true,
+            animateRotate: true
+        }
+    }
+};
+
+var cpuChartUsageCtx = document.getElementById('cpu-usage-chart').getContext('2d');
+new Chart(cpuChartUsageCtx, cpuUsageConfig);
+</script>
