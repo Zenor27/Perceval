@@ -28,20 +28,27 @@ namespace Perceval.Controllers
                 CpuClockSpeed = (double) _informationsService.GetCpuClockSpeed() / 1000,
                 CpuUsage = _informationsService.GetCpuUsage()
             };
+
+            RamViewModel ramViewModel = new RamViewModel
+            {
+                UsedRam = 8,
+                TotalRam = 16
+            };
             return new DashboardViewModel
             {
-                CpuViewModel = cpuViewModel
+                CpuViewModel = cpuViewModel,
+                RamViewModel = ramViewModel
             };
+        }
+
+        public ActionResult GetInformations()
+        {
+            return PartialView("Informations", GetDashboardViewModel());
         }
 
         public ViewResult Index()
         {
             return View(GetDashboardViewModel());
-        }
-
-        public IActionResult GetCpuInformations()
-        {
-            return PartialView("CpuCard", GetDashboardViewModel().CpuViewModel);
         }
     }
 }

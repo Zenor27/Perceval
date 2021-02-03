@@ -1,8 +1,4 @@
-﻿.justify-content-evenly {
-  justify-content: space-evenly !important;
-}
-
-a.navbar-brand {
+﻿a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
@@ -75,6 +71,11 @@ body {
 /* Dashboard cards related
 -------------------------------------------------- */
 
+.graph-card {
+  min-width: 600px;
+  max-width: 600px;
+}
+
 .card-rounded {
   border-radius: 20px;
 }
@@ -97,6 +98,18 @@ body {
   height: 3rem;
 }
 
+
+
+.cpu-usage-chart {
+  margin-left: 20px;
+}
+
+/* Card background
+-------------------------------------------------- */
+
+
+/* Colors are from https://flatuicolors.com/palette/au */
+
 .bg-orange {
   background: #ffbe76;
 }
@@ -105,6 +118,18 @@ body {
   background: #f0932b;
 }
 
-.cpu-usage-chart {
-  margin-left: 20px;
+.bg-blue {
+  background: #686de0;
+}
+
+.bg-blue-icon {
+  background: #4834d4
+}
+
+.bg-green {
+  background: #badc58;
+}
+
+.bg-green-icon {
+  background: #6ab04c;
 }

@@ -1,0 +1,21 @@
+﻿@model RamViewModel
+
+
+<div class="card card-rounded graph-card">
+    <div class="card-body bg-blue d-flex flex-row card-rounded-top">
+        <div class="icon-shape text-white rounded-circle shadow bg-blue-icon">
+            <i class="fas fa-memory"></i>
+        </div>
+        <div class="d-flex flex-column ml-4">
+            <h5 class="card-title">@Model.UsedRam on @Model.TotalRam Gb</h5>
+            <p class="card-text">4x4Gb Dual Channel HyperX</p>
+        </div>
+        @* <div class="cpu-usage-chart"> *@
+        @*     <canvas id="cpu-usage-chart" width="75" height="75"></canvas> *@
+        @* </div> *@
+    </div>
+    <div class="card-body card-rounded-bottom">
+    @*     <canvas id="cpu-chart"></canvas> *@
+    </div>
+</div>
+

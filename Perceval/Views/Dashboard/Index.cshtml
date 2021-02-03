@@ -4,15 +4,12 @@
 }
 
 
-<div class="row justify-content-evenly">
-    <div id="cpu-card">
-        @Html.Partial("CpuCard", Model.CpuViewModel)
-    </div>
+<div id="informations">
+    @await Html.PartialAsync("Informations", Model)
 </div>
-
 
 <script>
 $(() => {
-    setInterval(() => $('#cpu-card').load('/Dashboard/GetCpuInformations'), 1000);
+    setInterval(() => $('#informations').load('/Dashboard/GetInformations'), 1000);
 });
 </script>

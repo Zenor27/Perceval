@@ -1,0 +1,19 @@
+﻿@model DashboardViewModel
+
+<div class="col">
+    <div class="row justify-content-between">
+        <div id="cpu-card">
+            @await Html.PartialAsync("CpuCard", Model.CpuViewModel)
+        </div>
+        <div id="ram-card">
+            @await Html.PartialAsync("RamCard", Model.RamViewModel)
+        </div>
+        <div id="disk-card">
+            @await Html.PartialAsync("DiskCard", Model)
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+        @await Html.PartialAsync("UptimeCard", Model)
+    </div>
+</div>
