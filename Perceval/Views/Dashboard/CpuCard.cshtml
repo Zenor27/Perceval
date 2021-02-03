@@ -1,8 +1,6 @@
 ﻿@model DashboardViewModel
 
 
-@Model.CpuUsage
-
 <div class="card card-rounded">
     <div class="card-body bg-orange d-flex flex-row card-rounded-top">
         <div class="icon-shape text-white rounded-circle shadow bg-orange-icon">
@@ -23,21 +21,52 @@
 
 
 <script>
+addCpuUsage(@Model.CpuUsage);
+
 var cpuChartCtx = document.getElementById('cpu-chart').getContext('2d');
+
+Chart.pluginService.register({
+    beforeDraw: function(chart) {
+        if (chart.config.options.elements.center) {
+            // Get ctx from string
+            var ctx = chart.chart.ctx;
+
+            // Get options from the center object in options
+            var centerConfig = chart.config.options.elements.center;
+            
+            var fontStyle = 'Arial';
+            var text = centerConfig.text;
+
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
+            var centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
+            ctx.font = "normal normal lighter 15px " + fontStyle;
+            
+
+            //Draw text in center
+            ctx.fillText(text, centerX, centerY);
+        }
+    }
+});
+
 
 var conf = {
     type: 'line',
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', '8', '9', '10'],
+        labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
         datasets: [{
-            label: 'Tests',
-            data: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.8],
+            label: 'CPU Usage',
+            data: cpuUsageHistoric,
             fill: false,
             backgroundColor: "#ffbe76",
             borderColor: "#ffbe76"
         }]
     },
     options: {
+        animation: {
+            duration: 0
+        },
         legend: {
             display: false,
         },
@@ -46,6 +75,12 @@ var conf = {
             xAxes: [{
                 display: false,
 
+            }],
+            yAxes: [{
+                ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 1
+                }
             }]
         }
     }
@@ -80,8 +115,13 @@ var cpuUsageConfig = {
             display: false
         },
         animation: {
-            animateScale: true,
-            animateRotate: true
+            animateScale: false,
+            animateRotate: false
+        },
+        elements: {
+            center: {
+                text: `${parseInt(`${@Model.CpuUsage * 100}`, 10)}%`,
+            }
         }
     }
 };
