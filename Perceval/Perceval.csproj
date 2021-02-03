@@ -22,8 +22,5 @@
         <PackageReference Include="System.Management" Version="5.0.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Content Include="wwwroot\js\globals.js" />
-    </ItemGroup>
 
 </Project>

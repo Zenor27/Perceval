@@ -14,11 +14,11 @@
 [ ] - Cpu
     [X] - Display one simple informations, for example the current proco %
     [X] - Update CPU % each 2 seconds
-    [ ] - Avoid redraw of charts
-    [ ] - Draw cpu usage line chart
+    [X] - Avoid redraw of charts
+    [X] - Draw cpu usage line chart
     [ ] - Verify and create methods on linux
     
-[ ] - Separate view models for each informations (CPU, RAM etc)
+[X] - Separate view models for each informations (CPU, RAM etc)
 
 [ ] - Look for a way to create generic cards
    

@@ -20,13 +20,17 @@ namespace Perceval.Controllers
 
         private DashboardViewModel GetDashboardViewModel()
         {
-            return new DashboardViewModel
+            CpuViewModel cpuViewModel = new CpuViewModel
             {
                 LogicalCpuCores = _informationsService.GetLogicalCpuCores(),
                 PhysicalCpuCores = _informationsService.GetPhysicalCpuCores(),
                 CpuName = _informationsService.GetCpuName(),
                 CpuClockSpeed = (double) _informationsService.GetCpuClockSpeed() / 1000,
                 CpuUsage = _informationsService.GetCpuUsage()
+            };
+            return new DashboardViewModel
+            {
+                CpuViewModel = cpuViewModel
             };
         }
 
@@ -37,7 +41,7 @@ namespace Perceval.Controllers
 
         public IActionResult GetCpuInformations()
         {
-            return PartialView("CpuCard", GetDashboardViewModel());
+            return PartialView("CpuCard", GetDashboardViewModel().CpuViewModel);
         }
     }
 }
