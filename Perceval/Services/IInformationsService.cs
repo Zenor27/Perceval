@@ -88,5 +88,18 @@ namespace Perceval.Services
                 .Select(d => $"{d.Vendor ?? d.Model} {d.CapacityHRF}")
                 .ToList();
         }
+
+        public List<(string, ulong, ulong)> GetDisksUsage()
+        {
+            DriveInfo[] drives = DriveInfo.GetDrives();
+
+            return drives.Aggregate(new List<(string, ulong, ulong)>(),
+                (acc, driveInfo) =>
+                {
+                    acc.Add((driveInfo.Name, Convert.ToUInt64(driveInfo.TotalFreeSpace / (long) BytesToGigabytes),
+                        Convert.ToUInt64(driveInfo.TotalSize / (long) BytesToGigabytes)));
+                    return acc;
+                });
+        }
     }
 }

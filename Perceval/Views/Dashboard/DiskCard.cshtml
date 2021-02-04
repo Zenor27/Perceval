@@ -20,17 +20,13 @@
                 <p class="card-text font-weight-light @(i != 0 ? "ml-2" : "")">@nameDisk</p>
             }
         </div>
-        @*     <div class="cpu-usage-chart"> *@
-        @*         <canvas id="cpu-usage-chart" width="75" height="75"></canvas> *@
-        @*     </div> *@
     </div>
     <div class="card-body card-rounded-bottom">
-        @* <canvas id="cpu-chart"></canvas> *@
+        <canvas id="disk-chart"></canvas>
     </div>
 </div>
 
 <script>
-
 var diskUsageConf = {
     type: 'doughnut',
     data: {
@@ -70,4 +66,41 @@ var diskUsageConf = {
 
 var diskChartUsageCtx = document.getElementById('disk-usage-chart').getContext('2d');
 new Chart(diskChartUsageCtx, diskUsageConf);
+
+
+var diskChartCtx = document.getElementById('disk-chart').getContext('2d');
+var diskConf = {
+    type: 'bar',
+    data: {
+        labels: @Html.Raw(Json.Serialize(Model.DisksUsage.Select(d => d.Item1))),
+        datasets: [{
+            label: 'Used',
+            backgroundColor: '#ff7979',
+            borderColor: "#130f40",
+            borderWidth: 2,
+            stack: 'Stack 0',
+            fill: false,
+            data: @Html.Raw(Json.Serialize(Model.DisksUsage.Select(d => d.Item3 - d.Item2)))
+        }, {
+            label: 'Free',
+            backgroundColor: '#c7ecee',
+            borderColor: "#130f40",
+            borderWidth: 2,
+            stack: 'Stack 0',
+            fill: false,
+            data: @Html.Raw(Json.Serialize(Model.DisksUsage.Select(d => d.Item2)))
+
+        }]
+    },
+    options: {
+        responsive: true,
+        legend: {
+            display: false
+        },
+        animation: {
+            duration: 0
+        }
+    }
+}
+new Chart(diskChartCtx, diskConf);
 </script>

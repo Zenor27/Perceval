@@ -37,7 +37,8 @@ namespace Perceval.Controllers
             {
                 TotalDiskSpace = _informationsService.GetTotalDiskSpace(),
                 UsedDiskSpace = _informationsService.GetUsedDiskSpace(),
-                NamesDisk = _informationsService.GetNamesDisk()
+                NamesDisk = _informationsService.GetNamesDisk(),
+                DisksUsage = _informationsService.GetDisksUsage()
             };
             return new DashboardViewModel
             {
