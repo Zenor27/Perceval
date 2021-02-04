@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using HardwareInformation;
@@ -9,6 +10,8 @@ namespace Perceval.Services
 {
     public interface IInformationsService
     {
+        protected const ulong BytesToGigabytes = 1073741824;
+
         protected MachineInformation GetMachineInformation();
 
         public int GetLogicalCpuCores()
@@ -26,9 +29,9 @@ namespace Perceval.Services
             return Convert.ToInt32(GetMachineInformation().Cpu.PhysicalCores);
         }
 
-        public uint GetCpuClockSpeed()
+        public double GetCpuClockSpeed()
         {
-            return GetMachineInformation().Cpu.NormalClockSpeed;
+            return (double) GetMachineInformation().Cpu.NormalClockSpeed / 1000;
         }
 
         public float GetCpuUsage()
@@ -45,7 +48,7 @@ namespace Perceval.Services
             ramCounter.NextValue();
             Thread.Sleep(500);
             var availableBytes = ramCounter.NextValue();
-            return GetTotalRam() - availableBytes / 1073741824;
+            return GetTotalRam() - availableBytes / BytesToGigabytes;
         }
 
         public ulong GetTotalRam()
@@ -56,8 +59,33 @@ namespace Perceval.Services
 
         public List<string> GetNamesRam()
         {
-            return GetMachineInformation().RAMSticks
+            var names = GetMachineInformation().RAMSticks
                 .Select(ram => $"{ram.Manufacturer} {ram.CapacityHRF} @ {ram.Speed}Mhz")
+                .ToList();
+            var groupedNames = names.GroupBy(s => s);
+
+            return groupedNames.Select(g => $"{g.Count()} x {g.Key}").ToList();
+        }
+
+        public ulong GetTotalDiskSpace()
+        {
+            return GetMachineInformation().Disks
+                .Aggregate((ulong) 0, (acc, d) => d.Capacity / BytesToGigabytes + acc);
+        }
+
+        public ulong GetUsedDiskSpace()
+        {
+            DriveInfo[] drives = DriveInfo.GetDrives();
+
+            return drives.Aggregate<DriveInfo, ulong>(0,
+                (current, driveInfo) =>
+                    current + (ulong) (driveInfo.TotalSize - driveInfo.TotalFreeSpace)) / BytesToGigabytes;
+        }
+
+        public List<string> GetNamesDisk()
+        {
+            return GetMachineInformation().Disks
+                .Select(d => $"{d.Vendor ?? d.Model} {d.CapacityHRF}")
                 .ToList();
         }
     }

@@ -22,7 +22,7 @@ namespace Perceval.Controllers
                 LogicalCpuCores = _informationsService.GetLogicalCpuCores(),
                 PhysicalCpuCores = _informationsService.GetPhysicalCpuCores(),
                 CpuName = _informationsService.GetCpuName(),
-                CpuClockSpeed = (double) _informationsService.GetCpuClockSpeed() / 1000,
+                CpuClockSpeed = _informationsService.GetCpuClockSpeed(),
                 CpuUsage = _informationsService.GetCpuUsage()
             };
 
@@ -32,10 +32,18 @@ namespace Perceval.Controllers
                 TotalRam = _informationsService.GetTotalRam(),
                 NamesRam = _informationsService.GetNamesRam()
             };
+
+            DiskViewModel diskViewModel = new DiskViewModel
+            {
+                TotalDiskSpace = _informationsService.GetTotalDiskSpace(),
+                UsedDiskSpace = _informationsService.GetUsedDiskSpace(),
+                NamesDisk = _informationsService.GetNamesDisk()
+            };
             return new DashboardViewModel
             {
                 CpuViewModel = cpuViewModel,
-                RamViewModel = ramViewModel
+                RamViewModel = ramViewModel,
+                DiskViewModel = diskViewModel
             };
         }
 
