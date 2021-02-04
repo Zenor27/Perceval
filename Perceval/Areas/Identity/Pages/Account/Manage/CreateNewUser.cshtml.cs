@@ -20,18 +20,16 @@ namespace Perceval.Areas.Identity.Pages.Account.Manage
 
         [TempData] public string StatusMessage { get; set; }
 
-       
+
         public ActionResult OnGet()
         {
             return Page();
         }
 
-        [BindProperty]
-        public string Username { get; set; }
-        
-        [BindProperty]
-        public string Password { get; set; }
-        
+        [BindProperty] public string Username { get; set; }
+
+        [BindProperty] public string Password { get; set; }
+
         public async void OnPostAsync()
         {
             var user = new IdentityUser(Username);
@@ -47,6 +45,7 @@ namespace Perceval.Areas.Identity.Pages.Account.Manage
                 {
                     _logger.LogError(error.Description);
                 }
+
                 StatusMessage = "Error, user could not be created...";
             }
         }

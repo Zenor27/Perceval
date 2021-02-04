@@ -59,7 +59,8 @@ namespace Perceval
             var isUnix = RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ||
                          RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
             // Dependency injection of our services
-            services.AddSingleton(typeof(IInformationsService), isUnix ? (object) new LinuxInformationsService() : new WindowsInformationsService());
+            services.AddSingleton(typeof(IInformationsService),
+                isUnix ? (object) new LinuxInformationsService() : new WindowsInformationsService());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

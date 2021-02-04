@@ -6,7 +6,7 @@ namespace Perceval.Models.Dashboard
     {
         public double UsedRam { get; set; }
         public ulong TotalRam { get; set; }
-        
+
         public List<string> NamesRam { get; set; }
 
         public double RamUsage => UsedRam / TotalRam;

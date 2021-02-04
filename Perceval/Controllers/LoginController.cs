@@ -23,6 +23,7 @@ namespace Perceval.Controllers
             {
                 return RedirectToAction("Index", "AccessDenied");
             }
+
             return View();
         }
 

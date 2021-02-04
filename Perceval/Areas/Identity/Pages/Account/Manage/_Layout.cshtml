@@ -1,7 +1,7 @@
 ﻿@{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
     {
-        Layout = (string)parentLayout;
+        Layout = (string) parentLayout;
     }
     else
     {
@@ -12,10 +12,10 @@
 <h2>Settings</h2>
 
 <div>
-    <hr />
+    <hr/>
     <div class="row">
         <div class="col-md-3">
-            <partial name="_ManageNav" />
+            <partial name="_ManageNav"/>
         </div>
         <div class="col-md-9">
             @RenderBody()

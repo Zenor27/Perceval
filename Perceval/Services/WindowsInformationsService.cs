@@ -5,6 +5,7 @@ namespace Perceval.Services
     public class WindowsInformationsService : IInformationsService
     {
         private readonly MachineInformation _machineInformation;
+
         public WindowsInformationsService()
         {
             _machineInformation = MachineInformationGatherer.GatherInformation();

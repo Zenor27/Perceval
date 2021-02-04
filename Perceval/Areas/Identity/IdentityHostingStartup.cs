@@ -8,14 +8,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Perceval.Data;
 
 [assembly: HostingStartup(typeof(Perceval.Areas.Identity.IdentityHostingStartup))]
+
 namespace Perceval.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
-            });
+            builder.ConfigureServices((context, services) => { });
         }
     }
 }

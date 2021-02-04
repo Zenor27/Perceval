@@ -11,7 +11,7 @@ namespace Perceval.Models.Dashboard
         public double DiskUsage => (double) UsedDiskSpace / TotalDiskSpace;
 
         public List<string> NamesDisk { get; set; }
-        
+
         public List<(string, ulong, ulong)> DisksUsage { get; set; }
     }
 }
