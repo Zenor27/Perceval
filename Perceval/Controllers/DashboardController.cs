@@ -40,11 +40,18 @@ namespace Perceval.Controllers
                 NamesDisk = _informationsService.GetNamesDisk(),
                 DisksUsage = _informationsService.GetDisksUsage()
             };
+
+            UptimeViewModel uptimeViewModel = new UptimeViewModel
+            {
+                Uptime = _informationsService.GetUptime(),
+                OS = _informationsService.GetOS()
+            };
             return new DashboardViewModel
             {
                 CpuViewModel = cpuViewModel,
                 RamViewModel = ramViewModel,
-                DiskViewModel = diskViewModel
+                DiskViewModel = diskViewModel,
+                UptimeViewModel = uptimeViewModel
             };
         }
 

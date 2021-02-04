@@ -101,5 +101,18 @@ namespace Perceval.Services
                     return acc;
                 });
         }
+
+        public TimeSpan GetUptime()
+        {
+            var uptime = new PerformanceCounter("System", "System Up Time");
+            uptime.NextValue();
+            Thread.Sleep(500);
+            return TimeSpan.FromSeconds(uptime.NextValue());
+        }
+
+        public string GetOS()
+        {
+            return GetMachineInformation().OperatingSystem.ToString();
+        }
     }
 }
