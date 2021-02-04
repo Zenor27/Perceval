@@ -1,70 +1,73 @@
 ﻿a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }
 
 
@@ -72,36 +75,40 @@ body {
 -------------------------------------------------- */
 
 .graph-card {
-  min-width: 600px;
-  max-width: 600px;
+    min-width: 600px;
+    max-width: 600px;
 }
 
 .card-rounded {
-  border-radius: 20px;
+    border-radius: 20px;
 }
 
 .card-rounded-top {
-  border-radius: 20px 20px 0 0;
+    border-radius: 20px 20px 0 0;
 }
 
 .card-rounded-bottom {
-  border-radius: 0 0 20px 20px;
+    border-radius: 0 0 20px 20px;
 }
 
 .icon-shape {
-  padding: 12px;
-  display: inline-flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
+    padding: 12px;
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
 }
 
 
+.usage-chart {
+    margin-left: 20px;
+}
 
-.cpu-usage-chart {
-  margin-left: 20px;
+.card-body-max-height {
+    min-height: 124px;
+    max-height: 124px;
 }
 
 /* Card background
@@ -111,25 +118,25 @@ body {
 /* Colors are from https://flatuicolors.com/palette/au */
 
 .bg-orange {
-  background: #ffbe76;
+    background: #ffbe76;
 }
 
 .bg-orange-icon {
-  background: #f0932b;
+    background: #f0932b;
 }
 
 .bg-blue {
-  background: #686de0;
+    background: #686de0;
 }
 
 .bg-blue-icon {
-  background: #4834d4
+    background: #4834d4
 }
 
 .bg-green {
-  background: #badc58;
+    background: #badc58;
 }
 
 .bg-green-icon {
-  background: #6ab04c;
+    background: #6ab04c;
 }

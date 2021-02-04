@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Perceval.Models.Dashboard;
 using Perceval.Services;
 
@@ -9,12 +8,10 @@ namespace Perceval.Controllers
     [Authorize]
     public class DashboardController : BaseController
     {
-        private readonly ILogger<DashboardController> _logger;
         private readonly IInformationsService _informationsService;
 
-        public DashboardController(ILogger<DashboardController> logger, IInformationsService informationsService)
+        public DashboardController(IInformationsService informationsService)
         {
-            _logger = logger;
             _informationsService = informationsService;
         }
 
@@ -31,8 +28,9 @@ namespace Perceval.Controllers
 
             RamViewModel ramViewModel = new RamViewModel
             {
-                UsedRam = 8,
-                TotalRam = 16
+                UsedRam = _informationsService.GetUsedRam(),
+                TotalRam = _informationsService.GetTotalRam(),
+                NamesRam = _informationsService.GetNamesRam()
             };
             return new DashboardViewModel
             {

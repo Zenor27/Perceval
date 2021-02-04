@@ -1,20 +1,18 @@
-﻿namespace Perceval.Services
+﻿using HardwareInformation;
+
+namespace Perceval.Services
 {
     public class LinuxInformationsService : IInformationsService
     {
-        public string GetCpuName()
+        private readonly MachineInformation _machineInformation;
+        public LinuxInformationsService()
         {
-            throw new System.NotImplementedException();
+            _machineInformation = MachineInformationGatherer.GatherInformation();
         }
 
-        public int GetPhysicalCpuCores()
+        MachineInformation IInformationsService.GetMachineInformation()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public uint GetCpuClockSpeed()
-        {
-            throw new System.NotImplementedException();
+            return _machineInformation;
         }
     }
 }

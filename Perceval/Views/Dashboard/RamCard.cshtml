@@ -1,21 +1,113 @@
-﻿@model RamViewModel
+﻿@using Perceval.Utils
+@model RamViewModel
 
 
 <div class="card card-rounded graph-card">
-    <div class="card-body bg-blue d-flex flex-row card-rounded-top">
+    <div class="card-body bg-blue d-flex flex-row card-rounded-top card-body-max-height justify-content-between">
         <div class="icon-shape text-white rounded-circle shadow bg-blue-icon">
             <i class="fas fa-memory"></i>
         </div>
         <div class="d-flex flex-column ml-4">
-            <h5 class="card-title">@Model.UsedRam on @Model.TotalRam Gb</h5>
-            <p class="card-text">4x4Gb Dual Channel HyperX</p>
+            <h5 class="card-title">@($"{Model.UsedRam:0.00}") GB used on @($"{Model.TotalRam:0.00}") GB</h5>
+            <div class="d-flex flex-nowrap">
+                @foreach (var (nameRam, i) in @Model.NamesRam.WithIndex())
+                {
+                    <p class="card-text font-weight-light @(i != 0 ? "ml-2" : "")">@nameRam</p>
+                }
+            </div>
         </div>
-        @* <div class="cpu-usage-chart"> *@
-        @*     <canvas id="cpu-usage-chart" width="75" height="75"></canvas> *@
-        @* </div> *@
+        <div class="usage-chart">
+            <canvas id="ram-usage-chart" width="50" height="50"></canvas>
+        </div>
     </div>
     <div class="card-body card-rounded-bottom">
-    @*     <canvas id="cpu-chart"></canvas> *@
+        <canvas id="ram-chart"></canvas>
     </div>
 </div>
 
+<script>
+addRamUsage(@Model.RamUsage);
+
+var ramChartCtx = document.getElementById('ram-chart').getContext('2d');
+
+var ramChartConf = {
+    type: 'line',
+    data: {
+        labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        datasets: [{
+            label: 'RAM Usage',
+            data: ramUsageHistoric,
+            fill: false,
+            backgroundColor: "#ffbe76",
+            borderColor: "#ffbe76"
+        }]
+    },
+    options: {
+        animation: {
+            duration: 0
+        },
+        legend: {
+            display: false,
+        },
+        aspectRatio: 2,
+        scales: {
+            xAxes: [{
+                display: false,
+
+            }],
+            yAxes: [{
+                ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 1
+                }
+            }]
+        }
+    }
+};
+
+new Chart(ramChartCtx, ramChartConf);
+
+
+
+var ramUsageConf = {
+    type: 'doughnut',
+    data: {
+        datasets: [{
+            data: [
+                @Model.RamUsage,
+                1 - @Model.RamUsage
+            ],
+            backgroundColor: [
+                "#6ab04c",
+                "#fffff"
+            ],
+            borderWidth: 0,
+        }],
+        labels: [
+            'Used',
+            'Free'
+        ]
+    },
+    options: {
+        cutoutPercentage: 80,
+        responsive: true,
+        legend: {
+            display: false
+        },
+        animation: {
+            animateScale: false,
+            animateRotate: false
+        },
+        elements: {
+            center: {
+                text: `${parseInt(`${@Model.RamUsage * 100}`, 10)}%`,
+            }
+        }
+    }
+};
+
+var ramChartUsageCtx = document.getElementById('ram-usage-chart').getContext('2d');
+new Chart(ramChartUsageCtx, ramUsageConf);
+
+
+</script>
