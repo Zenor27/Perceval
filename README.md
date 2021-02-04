@@ -18,6 +18,10 @@ The goal of Perceval is to be simple and to work on Windows and Linux.
 
 Perceval will use docker in order to deploy the application, but this section is still in work in progress...
 
+### Login
+
+Default credentials are `admin/admin`. You can (and you should) change it in the application.
+
 ### Notes
 
 PR/Issues are welcome ! Feel free to contribute to this project !
