@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using HardwareInformation;
 
 namespace Perceval.Services
@@ -36,7 +37,8 @@ namespace Perceval.Services
 
         public TimeSpan GetUptime()
         {
-            return new TimeSpan();
+            var uptime = File.ReadAllText("/proc/uptime").Split(" ")[0];
+            return TimeSpan.FromSeconds(Convert.ToDouble(uptime));
         }
     }
 }
