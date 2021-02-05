@@ -20,7 +20,7 @@ namespace Perceval.Services
 
         public int GetPhysicalCpuCores() => Convert.ToInt32(GetMachineInformation().Cpu.PhysicalCores);
 
-        public double GetCpuClockSpeed() => (double) GetMachineInformation().Cpu.NormalClockSpeed / 1000;
+        public double GetCpuClockSpeed() => (double) GetMachineInformation().Cpu.MaxClockSpeed / 1000;
 
         public float GetCpuUsage();
 
