@@ -59,7 +59,7 @@ namespace Perceval.Services
 
         public ulong GetTotalRam()
         {
-            return (ulong) GetMemory().Total;
+            return (ulong)GetMemory().Total;
         }
 
         public ulong GetUsedDiskSpace()

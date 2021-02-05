@@ -37,7 +37,7 @@ namespace Perceval.Services
 
         public ulong GetTotalRam()
         {
-            var totalRam = GetMachineInformation().RAMSticks.Aggregate((ulong) 0, (acc, r) => r.Capacity + acc);
+            var totalRam = GetMachineInformation().RAMSticks.Aggregate((ulong)0, (acc, r) => r.Capacity + acc);
             return totalRam / BytesToGigabytes;
         }
 
@@ -47,7 +47,7 @@ namespace Perceval.Services
 
             return drives.Aggregate<DriveInfo, ulong>(0,
                        (current, driveInfo) =>
-                           current + (ulong) (driveInfo.TotalSize - driveInfo.TotalFreeSpace)) /
+                           current + (ulong)(driveInfo.TotalSize - driveInfo.TotalFreeSpace)) /
                    BytesToGigabytes;
         }
 
@@ -58,8 +58,8 @@ namespace Perceval.Services
             return drives.Aggregate(new List<(string, ulong, ulong)>(),
                 (acc, driveInfo) =>
                 {
-                    acc.Add((driveInfo.Name, Convert.ToUInt64(driveInfo.TotalFreeSpace / (long) BytesToGigabytes),
-                        Convert.ToUInt64(driveInfo.TotalSize / (long) BytesToGigabytes)));
+                    acc.Add((driveInfo.Name, Convert.ToUInt64(driveInfo.TotalFreeSpace / (long)BytesToGigabytes),
+                        Convert.ToUInt64(driveInfo.TotalSize / (long)BytesToGigabytes)));
                     return acc;
                 });
         }

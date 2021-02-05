@@ -20,7 +20,7 @@ namespace Perceval.Services
 
         public int GetPhysicalCpuCores() => Convert.ToInt32(GetMachineInformation().Cpu.PhysicalCores);
 
-        public double GetCpuClockSpeed() => (double) GetMachineInformation().Cpu.MaxClockSpeed / 1000;
+        public double GetCpuClockSpeed() => (double)GetMachineInformation().Cpu.MaxClockSpeed / 1000;
 
         public float GetCpuUsage();
 
@@ -41,7 +41,7 @@ namespace Perceval.Services
         public ulong GetTotalDiskSpace()
         {
             return GetMachineInformation().Disks
-                .Aggregate((ulong) 0, (acc, d) => d.Capacity / BytesToGigabytes + acc);
+                .Aggregate((ulong)0, (acc, d) => d.Capacity / BytesToGigabytes + acc);
         }
 
         public ulong GetUsedDiskSpace();

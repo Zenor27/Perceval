@@ -60,7 +60,7 @@ namespace Perceval
                          RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
             // Dependency injection of our services
             services.AddSingleton(typeof(IInformationsService),
-                isUnix ? (object) new LinuxInformationsService() : new WindowsInformationsService());
+                isUnix ? (object)new LinuxInformationsService() : new WindowsInformationsService());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

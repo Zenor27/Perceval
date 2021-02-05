@@ -8,7 +8,7 @@ namespace Perceval.Models.Dashboard
 
         public ulong UsedDiskSpace { get; set; }
 
-        public double DiskUsage => (double) UsedDiskSpace / TotalDiskSpace;
+        public double DiskUsage => (double)UsedDiskSpace / TotalDiskSpace;
 
         public List<string> NamesDisk { get; set; }
 
