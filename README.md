@@ -7,11 +7,11 @@
 ### About
 
 Perceval is a simple dashboard for monitoring your server.  
-The goal of Perceval is to be simple and to work on Windows and Linux.
+The goal of Perceval is to be simple and to work on both Windows and Linux.
 
 <p align="center">
     <img src="https://i.imgur.com/tPX0cdl.png" alt="dashboard"/>
-    <h7 align="center">The dashboard</h7>
+    <h7 align="center">Perceval Dashboard</h7>
 </p>
 
 ### Deploy
