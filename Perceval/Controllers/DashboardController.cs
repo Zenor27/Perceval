@@ -44,7 +44,7 @@ namespace Perceval.Controllers
             UptimeViewModel uptimeViewModel = new UptimeViewModel
             {
                 Uptime = _informationsService.GetUptime(),
-                OS = _informationsService.GetOS()
+                OS = _informationsService.GetOs()
             };
             return new DashboardViewModel
             {

@@ -12,44 +12,19 @@ namespace Perceval.Services
     {
         protected const ulong BytesToGigabytes = 1073741824;
 
-        protected MachineInformation GetMachineInformation();
+        public MachineInformation GetMachineInformation();
 
-        public int GetLogicalCpuCores()
-        {
-            return GetMachineInformation().Cpu.Cores.Count;
-        }
+        public int GetLogicalCpuCores() => GetMachineInformation().Cpu.Cores.Count;
 
-        public string GetCpuName()
-        {
-            return GetMachineInformation().Cpu.Name;
-        }
+        public string GetCpuName() => GetMachineInformation().Cpu.Name;
 
-        public int GetPhysicalCpuCores()
-        {
-            return Convert.ToInt32(GetMachineInformation().Cpu.PhysicalCores);
-        }
+        public int GetPhysicalCpuCores() => Convert.ToInt32(GetMachineInformation().Cpu.PhysicalCores);
 
-        public double GetCpuClockSpeed()
-        {
-            return (double) GetMachineInformation().Cpu.NormalClockSpeed / 1000;
-        }
+        public double GetCpuClockSpeed() => (double) GetMachineInformation().Cpu.NormalClockSpeed / 1000;
 
-        public float GetCpuUsage()
-        {
-            PerformanceCounter cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-            cpuCounter.NextValue();
-            Thread.Sleep(500);
-            return cpuCounter.NextValue() / 100;
-        }
+        public float GetCpuUsage();
 
-        public double GetUsedRam()
-        {
-            PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available Bytes", null);
-            ramCounter.NextValue();
-            Thread.Sleep(500);
-            var availableBytes = ramCounter.NextValue();
-            return GetTotalRam() - availableBytes / BytesToGigabytes;
-        }
+        public double GetUsedRam();
 
         public ulong GetTotalRam()
         {
@@ -73,14 +48,7 @@ namespace Perceval.Services
                 .Aggregate((ulong) 0, (acc, d) => d.Capacity / BytesToGigabytes + acc);
         }
 
-        public ulong GetUsedDiskSpace()
-        {
-            DriveInfo[] drives = DriveInfo.GetDrives();
-
-            return drives.Aggregate<DriveInfo, ulong>(0,
-                (current, driveInfo) =>
-                    current + (ulong) (driveInfo.TotalSize - driveInfo.TotalFreeSpace)) / BytesToGigabytes;
-        }
+        public ulong GetUsedDiskSpace();
 
         public List<string> GetNamesDisk()
         {
@@ -89,30 +57,10 @@ namespace Perceval.Services
                 .ToList();
         }
 
-        public List<(string, ulong, ulong)> GetDisksUsage()
-        {
-            DriveInfo[] drives = DriveInfo.GetDrives();
+        public List<(string, ulong, ulong)> GetDisksUsage();
 
-            return drives.Aggregate(new List<(string, ulong, ulong)>(),
-                (acc, driveInfo) =>
-                {
-                    acc.Add((driveInfo.Name, Convert.ToUInt64(driveInfo.TotalFreeSpace / (long) BytesToGigabytes),
-                        Convert.ToUInt64(driveInfo.TotalSize / (long) BytesToGigabytes)));
-                    return acc;
-                });
-        }
+        public TimeSpan GetUptime();
 
-        public TimeSpan GetUptime()
-        {
-            var uptime = new PerformanceCounter("System", "System Up Time");
-            uptime.NextValue();
-            Thread.Sleep(500);
-            return TimeSpan.FromSeconds(uptime.NextValue());
-        }
-
-        public string GetOS()
-        {
-            return GetMachineInformation().OperatingSystem.ToString();
-        }
+        public string GetOs() => GetMachineInformation().OperatingSystem.ToString();
     }
 }
