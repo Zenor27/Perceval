@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using HardwareInformation;
 
@@ -20,9 +21,45 @@ namespace Perceval.Services
             return 0;
         }
 
+        private class Memory
+        {
+            public double Used;
+            public double Total;
+            public double Free => Total - Free;
+        }
+
+        private Memory GetMemory()
+        {
+            var fileName = "free -m";
+            var info = new ProcessStartInfo(fileName);
+            info.FileName = "/bin/bash";
+            info.Arguments = $"-c \"{fileName}\"";
+            info.RedirectStandardOutput = true;
+
+            var output = "";
+            using (var proc = Process.Start(info))
+            {
+                output = proc?.StandardOutput.ReadToEnd();
+            }
+
+            var lines = output?.Split("\n");
+            var memory = lines?[1].Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+            return new Memory
+            {
+                Used = double.Parse(memory?[2] ?? "0") / 1000,
+                Total = double.Parse(memory?[1] ?? "0") / 1000
+            };
+        }
+
         public double GetUsedRam()
         {
-            return 0;
+            return GetMemory().Used;
+        }
+
+        public ulong GetTotalRam()
+        {
+            return (ulong) GetMemory().Total;
         }
 
         public ulong GetUsedDiskSpace()

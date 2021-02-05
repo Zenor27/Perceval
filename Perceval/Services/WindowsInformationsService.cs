@@ -35,6 +35,12 @@ namespace Perceval.Services
             return AsIInformationsService.GetTotalRam() - availableBytes / BytesToGigabytes;
         }
 
+        public ulong GetTotalRam()
+        {
+            var totalRam = GetMachineInformation().RAMSticks.Aggregate((ulong) 0, (acc, r) => r.Capacity + acc);
+            return totalRam / BytesToGigabytes;
+        }
+
         public ulong GetUsedDiskSpace()
         {
             DriveInfo[] drives = DriveInfo.GetDrives();

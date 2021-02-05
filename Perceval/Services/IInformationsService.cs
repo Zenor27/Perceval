@@ -26,11 +26,7 @@ namespace Perceval.Services
 
         public double GetUsedRam();
 
-        public ulong GetTotalRam()
-        {
-            var totalRam = GetMachineInformation().RAMSticks.Aggregate((ulong) 0, (acc, r) => r.Capacity + acc);
-            return totalRam / 1073741824;
-        }
+        public ulong GetTotalRam();
 
         public List<string> GetNamesRam()
         {
