@@ -8,9 +8,9 @@ namespace Perceval.Controllers
     [Authorize]
     public class DashboardController : BaseController
     {
-        private readonly IInformationsService _informationsService;
+        private readonly BaseInformationsService _informationsService;
 
-        public DashboardController(IInformationsService informationsService)
+        public DashboardController(BaseInformationsService informationsService)
         {
             _informationsService = informationsService;
         }

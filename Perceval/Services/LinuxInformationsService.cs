@@ -2,21 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using HardwareInformation;
 
 namespace Perceval.Services
 {
-    public class LinuxInformationsService : IInformationsService
+    public class LinuxInformationsService : BaseInformationsService
     {
-        private IInformationsService AsIInformationsService => this;
-        private readonly MachineInformation _machineInformation;
-
-        public LinuxInformationsService() => _machineInformation = MachineInformationGatherer.GatherInformation();
-
-        public MachineInformation GetMachineInformation() => _machineInformation;
-
         // FIXME: Implement methods down here
-        public float GetCpuUsage()
+        public override float GetCpuUsage()
         {
             return 0;
         }
@@ -52,27 +44,27 @@ namespace Perceval.Services
             };
         }
 
-        public double GetUsedRam()
+        public override double GetUsedRam()
         {
             return GetMemory().Used;
         }
 
-        public ulong GetTotalRam()
+        public override ulong GetTotalRam()
         {
             return (ulong)GetMemory().Total;
         }
 
-        public ulong GetUsedDiskSpace()
+        public override ulong GetUsedDiskSpace()
         {
             return 0;
         }
 
-        public List<(string, ulong, ulong)> GetDisksUsage()
+        public override List<(string, ulong, ulong)> GetDisksUsage()
         {
             return new List<(string, ulong, ulong)>();
         }
 
-        public TimeSpan GetUptime()
+        public override TimeSpan GetUptime()
         {
             var uptime = File.ReadAllText("/proc/uptime").Split(" ")[0];
             return TimeSpan.FromSeconds(Convert.ToDouble(uptime));
