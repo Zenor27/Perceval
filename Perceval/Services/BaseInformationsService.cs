@@ -34,20 +34,6 @@ namespace Perceval.Services
             return groupedNames.Select(g => $"{g.Count()} x {g.Key}").ToList();
         }
 
-        public ulong GetTotalDiskSpace()
-        {
-            return _machineInformation.Disks
-                .Aggregate((ulong) 0, (acc, d) => d.Capacity / BytesToGigabytes + acc);
-        }
-
-
-        public List<string> GetNamesDisk()
-        {
-            return _machineInformation.Disks
-                .Select(d => $"{d.Vendor ?? d.Model} {d.CapacityHRF}")
-                .ToList();
-        }
-
 
         public string GetOs() => _machineInformation.OperatingSystem.ToString();
 
@@ -65,6 +51,10 @@ namespace Perceval.Services
         public abstract ulong GetTotalRam();
 
         public abstract List<(string, ulong, ulong)> GetDisksUsage();
+
+        public abstract ulong GetTotalDiskSpace();
+
+        public abstract List<string> GetNamesDisk();
 
         public abstract TimeSpan GetUptime();
     }

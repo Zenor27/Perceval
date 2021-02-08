@@ -14,7 +14,7 @@
                 <canvas id="disk-usage-chart" width="50" height="50"></canvas>
             </div>
         </div>
-        <div class="d-flex flex-nowrap">
+        <div class="d-flex flex-nowrap justify-content-center">
             @foreach (var (nameDisk, i) in @Model.NamesDisk.WithIndex())
             {
                 <p class="card-text font-weight-light @(i != 0 ? "ml-2" : "")">@nameDisk</p>

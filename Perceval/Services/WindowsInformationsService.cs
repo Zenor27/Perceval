@@ -55,6 +55,19 @@ namespace Perceval.Services
                 });
         }
 
+        public override ulong GetTotalDiskSpace()
+        {
+            return _machineInformation.Disks
+                .Aggregate((ulong) 0, (acc, d) => d.Capacity / BytesToGigabytes + acc);
+        }
+
+        public override List<string> GetNamesDisk()
+        {
+            return _machineInformation.Disks
+                .Select(d => $"{d.Vendor ?? d.Model} {d.CapacityHRF}")
+                .ToList();
+        }
+
         public override TimeSpan GetUptime()
         {
             var uptime = new PerformanceCounter("System", "System Up Time");
